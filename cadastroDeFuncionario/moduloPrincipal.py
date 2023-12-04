@@ -4,7 +4,8 @@ import os
 diretorio_atual = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(diretorio_atual)
 from moduloClasse import Funcionario
-funcionarios = []
+
+import moduloClasse
 
 def main():
     while True:
@@ -14,7 +15,7 @@ def main():
             print('3)Retirar o colaborador')
             print('4)listar colaboradores')
             print('5)Encerrar programa')
-            print(f'{len(funcionarios)}')
+            print(f'{len(moduloClasse.Funcionario.funcionarios)}')
             try:
                 opc = int(input('Entre com a opição desejada: '))
                 if opc not in [1,2,3,4,5]:
@@ -23,6 +24,8 @@ def main():
                     cadastro()
                 if opc == 2:
                     consultar()
+                if opc == 3:
+                    deletar()
                     
             except ValueError:
                 print('O valor inserido não é permitido, entre somente com as opições do painel')
@@ -60,12 +63,12 @@ def cadastro():
             Ofuncionario = Funcionario(nome,idade,sexo,funcao,salario,atividade, data)
         
        
-            funcionarios.append(Ofuncionario)
+            moduloClasse.Funcionario.funcionarios.append(Ofuncionario)
             print('Funcionario Adicionado com sucesso')
-            
+        
         except:
             print('Funcionario não cadastrado ')
-        Ofuncionario.infosfuncionario()   
+        Ofuncionario.tostring()   
         continuar = str(input('Deseja cadastrar outro colaborador[SIM/NÃO]?: ')).upper()
         while continuar not in  'SIMNÃO':
             print('Entre somente com SIM ou Não')
@@ -87,28 +90,54 @@ def consultar():
                 print('Entre somente com opições disponiveis no menu. Tente Novamente!')
                 opc = int(input('Entre com o a opição desejada: ')) 
             if opc == 1:
+                nome = str(input('Entre com o nome do funcionario que deseja verificar: '))
                 try:
-                    nome = str(input('Entre com o nome do colaborador: '))
-                    funcionarios(nome).infosfuncionario()
+                    for colaborador in moduloClasse.Funcionario.funcionarios:
+                        if colaborador.nomeFuncionario == nome:
+                            colaborador.tostring()
+                        
                 except:
                     print('O funcionario não foi econtrado no sistema')
             elif opc == 2:
+                id1 = int(input('Entre com o id do fucionario: '))
                 try:
-                    id = int(input('Entre com o id do fucionario: '))
-                    funcionarios[id].infosfuncionario()
+                    for colaborador in moduloClasse.Funcionario.funcionarios:
+                        if colaborador.idFuncionario == id1:
+                            colaborador.tostring()
                 except:
                     print('O funcionario não foi econtrado no sistema')
             elif opc == 3:
                 p = 0
-                for colaborador in funcionarios:
+                for colaborador in moduloClasse.funcionarios:
                     p += 1
-                    print(p + colaborador)
+                    print(p , colaborador)
             elif opc == 4:
                 main()
         except ValueError:
             print('Insira somente valos que estão disponeiveis no menu. Tente Novamente!')
             
-                        
+             
+def deletar():
+    print('Deletar funcionario do sistema\n')  
+    print('1)Retire o Funcionario pelo nome\n'
+          '2)Retirar o Funcionario pelo id\n'
+          '3)Voltar ao menu principal')
+    retirar = int(input('Entre com o nome do funcionario que deseja retirar'))       
+    while retirar not in [1,2]:
+        print('Entre somente com valores que estão no meuno. Tente Novamente!')
+        retirar = int(input('Entre com o nome do funcionario que deseja retirar'))       
+    if retirar == 1:
+        nome = str(input('Entre com o nome do funcionario que deseja deletar: '))
+        del moduloClasse.funcionarios[nome]
+    elif retirar == 2:
+        id0 = int(input('Entre com o id do funcionario que deseja deletar: '))
+        del moduloClasse.funcionarios[id0]
+    elif retirar == 3:
+        main()
+    
+                      
 if __name__ == '__main__':
     main()
-    Funcionario()
+
+    
+    

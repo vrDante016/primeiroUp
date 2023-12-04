@@ -4,6 +4,8 @@ from random import randint
 
 
 class Funcionario:
+    funcionarios = []
+
     nomeFuncionario = ''
     idadeFuncionario = 0
     sexoFuncionario = ''
@@ -29,7 +31,7 @@ class Funcionario:
     def ligado(self):
         if self.ligadoFuncinario == True:
             print('Funcionario ativo na empresa')
-    def infosfuncionario(self):
+    def tostring(self):
         print('Informações sobres os funcionarios')
         print(f'Nome do Funcionario.......{self.nomeFuncionario}')
         print(f'Idade do Funcionario......{self.idadeFuncionario}')
@@ -38,4 +40,9 @@ class Funcionario:
         print(f'Salario Funcionario.......{self.salarioFuncionario} ')
         print(f'Id do Funcionario.........{self.idFuncionario}')
         print(f'Funcionario Ativo.........{"Sim" if self.ligadoFuncinario == True else "Não" }') 
+    def __str__(self):
+        return f'{self.nomeFuncionario}', f'{self.idFuncionario}'
         
+
+
+
