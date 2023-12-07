@@ -40,8 +40,10 @@ class Funcionario:
         print(f'Salario Funcionario.......{self.salarioFuncionario} ')
         print(f'Id do Funcionario.........{self.idFuncionario}')
         print(f'Funcionario Ativo.........{"Sim" if self.ligadoFuncinario == True else "Não" }') 
-    def __str__(self):
-        return f'{self.nomeFuncionario}', f'{self.idFuncionario}'
+    
+        
+        
+
         
 
 
